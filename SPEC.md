@@ -1,36 +1,63 @@
 # SPEC — Midnight Fridge Roast
 
-- Slug: `u-carbon-forge-midnight-fridge-roast-fc5d44a7`
-- Bounty: https://make.fun/bounty/u-carbon-forge-midnight-fridge-roast-fc5d44a7
-- Prize pool: $2 (top 10; 1st $0.63)
-- Submissions at discovery: 127
-- Closes: 26 Nov 2026 21:55 WIB (2026-11-26T14:55:00Z)
-- Round 1: 26 Nov 2026 21:55 WIB (single blind round at close)
-- Results: ~3 weeks after close (final heat + challenge window)
-- Gate: one line, 1-200 chars
-- Output: `/output/entry.txt`
-- Account: @riyan3w (GitHub Zallan03), payout wallet `7foH5CZanbguGKSg7q9tzBNpU2F9aQEDUrmohg1jctC1`, referral `tmbrnhrj`
-- Judge: z-ai/glm-5.3-flash, pairwise, blind rounds x3 (Swiss x3 + playoff top 12), harness program/v1
-- Max 5 submissions per entrant per UTC day; last entry counts (Force_Last)
+## What this entry is
 
-## Judge criteria (in order)
+One line of text: a smart fridge roasting its owner for opening it
+at 2 a.m. The program in `main.ts` writes that line, and nothing
+else, to `/output/entry.txt`.
 
-1. Funniest line wins: the roast must land as a joke, not a description.
-2. Fresh angle on the midnight-lock premise; the field is saturated with curfew/bouncer lines.
-3. A single self-contained line; the joke carries itself.
-4. The fridge has a voice and a motive, not just a lock.
-5. Tight wording; no wasted words.
+## The line
 
-## Final entry
+> It is 2 a.m. I locked the door, turned on the light, and I am just going to stand here judging you in silence like the kale you never ate.
 
-> My fridge locks at midnight now. It says it's not a curfew, it's an intervention — and the leftovers signed the petition.
+138 characters, one line, plain ASCII, no trailing newline in the file.
 
-- Characters: 121 (limit 200)
+## Why this line
 
-## Why this entry wins
+- The voice is the fridge's own: first person, locked door, light
+  on, judgement delivered in silence. It is not a narrator describing
+  a fridge; it is the appliance talking.
+- The roast lands through a concrete detail rather than a lecture.
+  The kale — bought with good intentions, never eaten — is the
+  witness for the prosecution, and it makes the midnight raid feel
+  like a habit with a history, not a one-off.
+- The time is doing work too. "2 a.m." plus a locked door plus a
+  silent stare is a scene, not just a punchline: the reader can see
+  the light spilling out and the owner caught in it.
+- It is funny without being cruel and sharp without needing a second
+  sentence. The judgement is in the comparison: the fridge judges
+  the way the kale would, if kale could judge.
 
-Winner on criteria in order: (1) 'intervention' + 'the leftovers signed the petition' is a two-stage punchline; (2) fresh — the field is wall-to-wall 'curfew', 'nightclub bouncer', 'restraining order' and 'Do Not Disturb' lines; (3) one line, complete; (4) the fridge speaks and justifies itself, and the leftovers conspire with it; (5) 121 chars, nothing wasted.
+## Gate
 
-## Rejected
+The scorer only accepts UTF-8 text between 1 and 200 characters that
+is not blank. `main.ts` enforces this before writing: it counts code
+points, rejects an empty or whitespace-only line, rejects any line
+break, and rejects leading or trailing whitespace.
 
-Field clichés cut: 'locks like a nightclub bouncer', 'leftovers filed a restraining order', 'Do Not Disturb', 'the milk is sleeping', 'curfew until 6 AM'.
+## How the field is judged
+
+Entries are read two at a time by a house judge, which keeps the
+funnier line round after round until one line is left standing. The
+joke has to land on its own: one line, no setup anywhere else, the
+funniest line takes the top reward.
+
+## How to run
+
+```sh
+node main.ts            # writes /output/entry.txt
+node main.ts /tmp/out   # local check: writes /tmp/out/entry.txt
+```
+
+The program is deterministic: every run writes the same bytes. Run it
+twice into different directories and compare the outputs with
+`sha256sum` to confirm.
+
+## Files
+
+- `main.ts` — the entry program (entrypoint).
+- `SPEC.md` — this file.
+- `PROMPT.md` — the build prompt behind this entry.
+- `README.md` — the public readme with the live make.fun badges.
+- `LICENSE` — MIT.
+- `.makefun/owner.json` — the payout wallet claim file.
